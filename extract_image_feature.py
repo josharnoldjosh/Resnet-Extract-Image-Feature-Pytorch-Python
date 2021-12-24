@@ -29,7 +29,7 @@ def get_vector(image_name):
     my_embedding = torch.zeros(512)
     # 4. Define a function that will copy the output of a layer
     def copy_data(m, i, o):
-        my_embedding.copy_(o.data)
+        my_embedding.copy_(o.data.reshape(o.data.size(1)))
     # 5. Attach that function to our selected layer
     h = layer.register_forward_hook(copy_data)
     # 6. Run the model on our transformed image
